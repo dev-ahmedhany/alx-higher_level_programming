@@ -10,9 +10,12 @@ if __name__ == '__main__':
                          db=sys.argv[3], port=3306)
 
     cur = db.cursor()
-    cur.execute("SELECT cities.id, cities.name, states.name \
-    FROM cities JOIN states ON cities.state_id = states.id \
-    WHERE states.name = %s;",(sys.argv[4],))
+    cur.execute(
+        "SELECT cities.id, cities.name, states.name \
+        FROM cities JOIN states ON cities.state_id = states.id \
+        WHERE states.name = %s;",
+        (sys.argv[4],)
+    )
     states = cur.fetchall()
 
     print(", ".join([state[1] for state in states]))
